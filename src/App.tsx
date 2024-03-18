@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import "./App.css";
-import Todolist from "./components/Todolist/Todolist";
+import Todolist, { TypeTasks } from "./components/Todolist/Todolist";
+import { v1 } from "uuid";
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: "CSS", isDone: true },
-    { id: 2, title: "JS", isDone: true },
-    { id: 3, title: "React", isDone: false },
+    { id: v1(), title: "CSS", isDone: true },
+    { id: v1(), title: "JS", isDone: true },
+    { id: v1(), title: "React", isDone: false },
   ]);
 
-  const [tasks2, setTasks2] = useState([
-    { id: 1, title: "Terminator", isDone: true },
-    { id: 2, title: "Rokki 2", isDone: false },
-    { id: 3, title: "Jeyson Stetkhem", isDone: true },
-  ]);
+  let removeTask = (taskId: string) => {
+    setTasks(tasks.filter((t) => t.id !== taskId));
+  };
 
+  let addTask = (newPost: TypeTasks) => {
+    if (!newPost.title || !newPost.title.trim()) {
+      return;
+    }
+    setTasks([...tasks, newPost]);
+  };
   return (
     <div className="App">
       <div className="todolist-container">
-        <Todolist tasks={tasks} title="What to learn" />
-        <Todolist tasks={tasks2} title="What to movie" />
+        <Todolist
+          tasks={tasks}
+          title="What to learn"
+          removeTask={removeTask}
+          addTask={addTask}
+        />
       </div>
     </div>
   );
