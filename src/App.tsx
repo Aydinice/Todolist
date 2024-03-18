@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Todolist from "./components/Todolist/Todolist";
 
 function App() {
+  const [tasks, setTasks] = useState([
+    { id: 1, title: "CSS", isDone: true },
+    { id: 2, title: "JS", isDone: true },
+    { id: 3, title: "React", isDone: false },
+  ]);
+
+  const [tasks2, setTasks2] = useState([
+    { id: 1, title: "Terminator", isDone: true },
+    { id: 2, title: "Rokki 2", isDone: false },
+    { id: 3, title: "Jeyson Stetkhem", isDone: true },
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="todolist-container">
+        <Todolist tasks={tasks} title="What to learn" />
+        <Todolist tasks={tasks2} title="What to movie" />
+      </div>
     </div>
   );
 }
